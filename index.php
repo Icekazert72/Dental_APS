@@ -90,67 +90,74 @@
             </div>
         </div>
 
-        <div class="title mt-5 mb-5">
+        <div class="title mt-3 mb-4">
             <h2>Servicios APS</h2>
         </div>
 
         <div class="servicios container">
-            <!-- <div class="cm">
-                <div class="serv">
-                    <div class="mr">
-                        mas</br>
-                        info...
-                    </div>
-                    <div class="tt">
-                        <div class="t">
-                            <h5>Examen</h5>
+
+            <div class="tres mb-2">
+                <div class="cart">
+                    <div class="tarjeta text-center">
+                        <div class="icono ">
+                            <img src="img/limpieza.png" alt="">
                         </div>
-                        <div class="img"><img src="" alt=""></div>
+                        <h5>Limpieza dental</h5>
+                        <p>Lorem fistrum por la gloria de mi madre esse jarl aliqua llévame al sircoo.</p>
+
                     </div>
                 </div>
-                <div class="serv">
-                    <div class="mr">
-                        mas</br>
-                        info...
-                    </div>
-                    <div class="tt">
-                        <div class="t">
-                            <h5>Limpieza</h5>
+
+                <div class=" cart">
+                    <div class="tarjeta text-center">
+                        <div class="icono ">
+                            <img src="img/revision (1).png" alt="">
                         </div>
-                        <div class="img"><img src="" alt=""></div>
+                        <h5>Examen dental</h5>
+                        <p>Lorem fistrum por la gloria de mi madre esse jarl aliqua llévame al sircoo.</p>
+
                     </div>
                 </div>
-                <div class="serv">
-                    <div class="mr">
-                        mas</br>
-                        info...
-                    </div>
-                    <div class="tt">
-                        <div class="t">
-                            <h5>Empaste</h5>
+
+                <div class="cart">
+                    <div class="tarjeta text-center">
+                        <div class="icono">
+                            <img src="img/emplaste.png" alt="">
                         </div>
-                        <div class="img"><img src="" alt=""></div>
+                        <h5>Empastes</h5>
+                        <p>Lorem fistrum por la gloria de mi madre esse jarl aliqua llévame al sircoo.</p>
+
                     </div>
                 </div>
             </div>
-            <div class="cm">
-                <div class="serv">
-                    <div class="mr"></div>
-                    <div class="tt">
-                        <div class="t"></div>
-                        <div class="img"><img src="" alt=""></div>
-                    </div>
-                </div>
-                <div class="serv">
-                    <div class="mr"></div>
-                    <div class="tt">
-                        <div class="t"></div>
-                        <div class="img"><img src="" alt=""></div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
 
+            <div class="dos mt-1">
+                <div class="cart">
+                    <div class="tarjeta text-center">
+                        <div class="icono">
+                            <img src="img/Extraccion.png" alt="">
+                        </div>
+                        <h5>Extraccion Dental</h5>
+                        <p>Lorem fistrum por la gloria de mi madre esse jarl aliqua llévame al sircoo.</p>
+
+                    </div>
+                    <a href="" class="btn">MIrar Contenido</a>
+                </div>
+
+                <div class=" cart">
+                    <div class="tarjeta text-center ">
+                        <div class="icono">
+                            <img src="img/Insercion.png" alt="">
+                        </div>
+                        <h5>Insercion Dental</h5>
+                        <p>Lorem fistrum por la gloria de mi madre esse jarl aliqua llévame al sircoo.</p>
+
+                    </div>
+                    <a href="" class="btn">MIrar Contenido</a>
+                </div>
+            </div>
+
+        </div>
     </main>
 
 
