@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +43,7 @@
                 </div>
                 <div class="preferencias">
                     <div class="idioma"><img src="img/bandera.png" alt=""></div>
-                    <div class="usuario btn"><i class="fa-regular fa-user"></i></div>
+                    <div class="usuario btn" id="btnUsuario"><i class="fa-regular fa-user"></i></div>
                     <div class="opciones btn"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                 </div>
             </div>
@@ -59,7 +65,7 @@
                             <h5>Bienvenido a nuestra clinica dental APS</h5>
                             <p>Tenemos una pregunta para ti ,Es la primera vez que nos visitas? .</p>
                             <div class="respuesta">
-                                <div class="btn">SI</div>
+                                <div class="btn" id="btnUsuario">SI</div>
                                 <div class="btn">NO</div>
                             </div>
                         </div>
@@ -160,9 +166,48 @@
         </div>
     </main>
 
+    <footer></footer>
+
+    <div class="modals">
+        <div class="modal fade" id="ModalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Login...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ModalCrearLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Crear ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sweetalert2.js"></script>
+    <script src="js/ajustes.js"></script>
 </body>
 
 </html>

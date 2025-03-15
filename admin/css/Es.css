@@ -1,0 +1,380 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    background-color: #dfe9f5;
+    width: 100%;
+    height: 100vh;
+}
+
+header {
+    width: 100%;
+}
+
+header:hover {
+    z-index: 100;
+    position: relative;
+}
+
+.navigation-bar {
+    background-color: white;
+    width: 75px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    transition:  whidt 0.2s linear;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: all 0.5s ease-in;
+}
+
+.navigation-bar:hover {
+    width: 200px;
+    transition: all 0.6s ease;
+}
+
+.navigation-bar nav {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    transition:  whidt 0.2s linear;
+    overflow: hidden;
+    left: 0;
+}
+
+.navigation-bar nav ul {
+    padding: 16px;
+}
+
+.navigation-bar nav ul li {
+    list-style-type: none;
+    display: flex;
+    margin-top: 30px;
+}
+
+.navigation-bar nav ul li a {
+    display: flex;
+    gap: 30px;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
+
+.navigation-bar nav ul li a div i, span {
+    color: grey;
+}
+
+.navigation-bar nav ul li a div i {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.navigation-bar nav ul li a div i:hover, span:hover {
+    color: aquamarine;
+}
+
+.logout {
+    position: absolute;
+    bottom: 1px;
+}
+
+header nav .perfil_usuario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.btn-buscar {
+    color: aquamarine;
+    border-color: aquamarine;
+    border: solid 1px aquamarine;
+}
+
+.btn-buscar:hover {
+    color: aquamarine;
+    background-color: #dfe9f5;
+    border: solid 1px aquamarine;
+}
+
+.panel-centlral {
+    width: 98.3%;
+    height: 90%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+}
+
+.panel {
+    width: 250px;
+    height: 100px;
+    margin: 20px 15px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: solid 2px aquamarine;
+    background-color: rgb(255, 255, 255, 0.50);
+    border-radius: 10px;
+}
+
+.panel-farmaco {
+    border: solid 2px orange;
+    background-color: rgb(255, 255, 255, 0.50);
+}
+
+.panel-citas {
+    border: solid 2px purple;
+    background-color: rgb(255, 255, 255, 0.50);
+}
+
+.panel-consultas {
+    border: solid 2px blue;
+    background-color: rgb(255, 255, 255, 0.50);
+}
+
+.listas {
+    width: 100%;
+    height: 395px;
+    position: relative;
+    top: 140px;
+    display: flex;
+    gap: 10px;
+}
+
+.lista {
+    height: 20%;
+    border-radius: 15px;
+    box-shadow: 0 2px 1px 1px rgb(65, 64, 64, 0.50);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transition:  whidt 0.2s linear;
+}
+
+.lista-citas {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.lista-citas:hover {
+    height: 98%;
+    transition: all 0.6s ease;
+    z-index: 100;
+}
+
+
+.lista-pacientes {
+    width: 65%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+
+.lista-pacientes:hover {
+    height: 98%;
+    transition: all 0.6s ease;
+    z-index: 100;
+}
+
+.lista-pacientes div table {
+    width: 100%;
+    background-color: black;
+}
+
+main .panel_estado {
+    position: relative;
+    width: 44px;
+    height: 47px;
+    top: 133px;
+    left: 88px;
+    display: flex;
+    align-items: center;
+    background-color: aquamarine;
+    border-radius: 50px;
+    overflow: hidden;
+    transition: all 0.7s ease-in-out;
+}
+
+main .panel_estado:hover {
+    width: 600px;
+    transition: all 0.8s ease-in;
+}
+
+main .panel_estado .menu {
+    display: flex;
+    align-items: center;
+}
+
+main .panel_estado .menu_trat {
+    display: flex;
+    align-items: center;
+}
+
+.tema.oscuro {
+    background-color: rgb(52, 52, 52);
+}
+
+.boton-tema-normal {
+    visibility: hidden;
+}
+
+.boton-tema-normal.v {
+    visibility: visible;
+}
+
+.boton-tema-oscuro.x {
+    visibility: hidden;
+}
+
+.fa-regular {
+    font-size: 21.5px;
+    color: rgb(59, 84, 76);
+}
+
+.fa-solid {
+    font-size: 21.5px;
+    color: rgb(57, 83, 75);
+}
+
+.panel_reciente {
+    display: none;
+}
+
+.panel_reciente.ver {
+    display: block;
+}
+
+.panel_c_reciente {
+    display: none;
+}
+
+.panel_c_reciente.ver {
+    display: block;
+}
+
+.panel_recetado {
+    display: none;
+}
+
+.panel_recetado.ver {
+    display: block;
+}
+
+
+.pnls {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 28px;
+    flex-direction: column;
+    margin-top: 100px;
+
+    .paneles {
+        width: 80%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow-y: scroll;
+        height: 280px;
+        background-color: rgb(235, 255, 255, 0.50);
+        border-radius: 10px 0px 0px 10px;
+
+
+        table {
+            width: 100%;
+
+            thead {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+
+                tr {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 40px;
+                    border-radius: 10px 0px 10px 0px;
+                    background-color: aquamarine;
+
+                    th {
+                        width: 35%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                    }
+
+                    .fototable {
+                        width: 20%;
+                    }
+                }
+
+            }
+
+            tbody {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+
+
+                tr {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 50px;
+
+                    th {
+                        width: 35%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                    }
+
+                    .fototable {
+                        width: 20%;
+                    }
+                }
+            }
+        }
+    }
+
+    .paneles::-webkit-scrollbar {
+        width: 8px;
+        background-color: aquamarine;
+        border-radius: 20px;
+        background-color: transparent;
+    }
+    .paneles::-webkit-scrollbar:window-inactive{
+        display: none;
+    }
+    .paneles::-webkit-scrollbar-thumb {
+        background-color: aquamarine;
+        border-radius: 6px;
+    }
+}

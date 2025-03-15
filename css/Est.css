@@ -1,3 +1,8 @@
+*,::before,::after{
+    /* width: 100%; */
+}
+
+
 * {
     padding: 0;
     margin: 0;
@@ -11,6 +16,9 @@ body {
     flex-direction: column;
     text-decoration: none;
     background: linear-gradient(white, #c1eefc);
+    position: relative;
+    top: 0;
+    z-index: 1;
 }
 
 header {
@@ -116,6 +124,7 @@ header {
 
 main {
     width: 100%;
+    
 
 
     .sell {
