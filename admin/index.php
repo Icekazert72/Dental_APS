@@ -1,28 +1,3 @@
-<?php
-
-require_once("bbdd/bbdd.php");
-
-$Pacientes = "SELECT id_paciente, nombre, apellido, dni FROM paciente";
-$queryPaciente = mysqli_query($conexion, $Pacientes);
-$VerPacientes = mysqli_num_rows($queryPaciente);
-
-$Total_pacientes = "SELECT COUNT(id_paciente) FROM paciente";
-$queryTotalPacientes = mysqli_query($conexion, $Total_pacientes);
-$MostrarCantidad = mysqli_num_rows($queryTotalPacientes);
-$CantidadPacientes = mysqli_fetch_assoc($queryTotalPacientes);
-
-$Total_citas = "SELECT COUNT(id_cita_confirm) FROM cita_confirmada";
-$queryTotalCitas = mysqli_query($conexion, $Total_citas);
-$mostrarCAntidad_citas = mysqli_num_rows($queryTotalCitas);
-$CantidadCitas = mysqli_fetch_assoc($queryTotalCitas);
-
-$Total_farmaco = "SELECT COUNT(id_farmaco) FROM farmaco";
-$queryTotalfarmacos = mysqli_query($conexion, $Total_farmaco);
-$MostrarCantidad_farmacos = mysqli_num_rows($queryTotalfarmacos);
-$Cantidadfarmacos = mysqli_fetch_assoc($queryTotalfarmacos);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -136,7 +111,7 @@ $Cantidadfarmacos = mysqli_fetch_assoc($queryTotalfarmacos);
                     <h5>PACIENTES</h5>
                 </div>
                 <div><span>
-                        <h2><?php echo $CantidadPacientes['COUNT(id_paciente)'] ?></h2>
+                        <h2>0</h2>
                     </span></div>
             </div>
             <div class="panel panel-farmaco">
@@ -144,7 +119,7 @@ $Cantidadfarmacos = mysqli_fetch_assoc($queryTotalfarmacos);
                     <h5>FARMACOS</h5>
                 </div>
                 <div><span>
-                        <h2><?php echo $Cantidadfarmacos['COUNT(id_farmaco)'] ?></h2>
+                        <h2>0</h2>
                     </span></div>
             </div>
             <div class="panel panel-citas">
@@ -152,7 +127,7 @@ $Cantidadfarmacos = mysqli_fetch_assoc($queryTotalfarmacos);
                     <h5>CITAS</h5>
                 </div>
                 <div><span>
-                        <h2><?php echo $CantidadCitas['COUNT(id_cita_confirm)'] ?></h2>
+                        <h2>0</h2>
                     </span></div>
             </div>
             <div class="panel panel-consultas">
@@ -185,17 +160,17 @@ $Cantidadfarmacos = mysqli_fetch_assoc($queryTotalfarmacos);
                         <tr>
                             <th class="fototable">Foto</th>
                             <th>Nombre</th>
-                            <th>Apelldo</th>
+                            <th>Apellidos</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th class="fototable">img</th>
-                            <th>Todos</th>
-                            <th>Apelldo</th>
-                            <th>Acciones</th>
-                        </tr>
+                    <tbody id="usuarios_recientes">
+                        <!-- <tr>
+                            <th class="fototable" style=""><img src="img/" alt=""></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -247,6 +222,7 @@ $Cantidadfarmacos = mysqli_fetch_assoc($queryTotalfarmacos);
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/principal.js"></script>
+    <script src="js/usuarios_recientes.js"></script>
 </body>
 
 </html>

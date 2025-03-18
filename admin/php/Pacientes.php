@@ -54,7 +54,7 @@ $VerPacientes = mysqli_num_rows($queryPaciente);
                                         </div>
                                         <div class="modal-body">
 
-                                            <form class="row g-3 needs-validation" novalidate method="post" action="NuevoPaciente.php" enctype="multipart/form-data">
+                                            <form class="row g-3 needs-validation" novalidate method="post" action="" enctype="multipart/form-data" id="formCrearPaciente">
                                                 <div class="col-md-4">
                                                     <label for="validationCustom01" class="form-label">Nombre</label>
                                                     <input type="text" class="form-control" id="validationCustom01" name="nombre" required>
@@ -70,61 +70,50 @@ $VerPacientes = mysqli_num_rows($queryPaciente);
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">DNI</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="dni" required>
+                                                    <label for="validationCustom03" class="form-label">Fecha de nacimiento</label>
+                                                    <input type="date" class="form-control" id="validationCustom03" name="fecha_nacimiento" required>
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Fecha</label>
-                                                    <input type="date" class="form-control" id="validationCustom02" name="fecha" required>
+                                                    <label for="validationCustom04" class="form-label">Direccion</label>
+                                                    <input type="text" class="form-control" id="validationCustom04" name="direccion" required>
                                                 </div>
 
                                                 <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Estado Civil</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="estado_civil" required>
+                                                    <label for="validationCustom05" class="form-label">Telefono</label>
+                                                    <input type="text" class="form-control" id="validationCustom05" name="telefono" required>
                                                 </div>
 
                                                 <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Domicillo</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="domicillo" required>
+                                                    <label for="validationCustom06" class="form-label">Correo Electronico</label>
+                                                    <input type="email" class="form-control" id="validationCustom06" name="email" required>
                                                 </div>
 
                                                 <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Ciudad</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="ciudad" required>
+                                                    <label for="validationCustom07" class="form-label">Historial Médico</label>
+                                                    <input type="text" class="form-control" id="validationCustom07" name="historial_medico" required>
                                                 </div>
 
                                                 <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Email</label>
-                                                    <input type="email" class="form-control" id="validationCustom02" name="email" required>
+                                                    <label for="validationCustom08" class="form-label">Género</label>
+                                                    <input type="text" class="form-control" id="validationCustom08" name="genero" required>
                                                 </div>
 
+                                                <!-- Campo para subir imagen -->
                                                 <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Contacto</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="contacto" required>
+                                                    <label for="validationCustom09" class="form-label">Imagen</label>
+                                                    <input type="file" class="form-control" id="validationCustom09" name="imagen" accept="image/*" required>
                                                 </div>
 
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Ocupacion</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="ocupacion" required>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Genero</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="genero" required>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">FOTO</label>
-                                                    <input type="file" class="form-control" name="foto" id="validationCustom02" required>
-                                                </div>
                                                 <div class="col-12">
                                                     <button class="btn btn-primary" type="submit">Agregar</button>
                                                 </div>
                                             </form>
+
+
 
                                         </div>
                                         <div class="modal-footer">
@@ -157,68 +146,68 @@ $VerPacientes = mysqli_num_rows($queryPaciente);
         </div>
 
         <div class="pnls mt-3">
-        <div class="paneles panel_pacientes" id="panel_todos">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="fototable">Foto</th>
-                        <th>Nombre</th>
-                        <th>Apelldo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th class="fototable">img</th>
-                        <th>Todos</th>
-                        <th>Apelldo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="paneles panel_pacientes" id="panel_todos">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="fototable">Foto</th>
+                            <th>Nombre</th>
+                            <th>Apelldo</th>
+                            <th>Fecha Registro</th>
+                        </tr>
+                    </thead>
+                    <tbody id="todo_pacientes">
+                        <!-- <tr>
+                            <th class="fototable">img</th>
+                            <th>Todos</th>
+                            <th>Apelldo</th>
+                            <th>Acciones</th>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="paneles panel_tratamiento" id="panel_tratamiento">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="fototable">Foto</th>
-                        <th>Nombre</th>
-                        <th>Apelldo</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th class="fototable">img</th>
-                        <th>tratamiento</th>
-                        <th>Apelldo</th>
-                        <th>Estado</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="paneles panel_tratamiento" id="panel_tratamiento">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="fototable">Foto</th>
+                            <th>Nombre</th>
+                            <th>Apelldo</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="fototable">img</th>
+                            <th>tratamiento</th>
+                            <th>Apelldo</th>
+                            <th>Estado</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="paneles panel_tratado" id="panel_tratado">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="fototable">Foto</th>
-                        <th>Nombre</th>
-                        <th>Apelldo</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th class="fototable">img</th>
-                        <th>tratado</th>
-                        <th>Apelldo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="paneles panel_tratado" id="panel_tratado">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="fototable">Foto</th>
+                            <th>Nombre</th>
+                            <th>Apelldo</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="fototable">img</th>
+                            <th>tratado</th>
+                            <th>Apelldo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </main>

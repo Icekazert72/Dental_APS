@@ -57,15 +57,15 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
                             <th>Nombre</th>
-                            <th>Fecha</th>
+                            <th>Fecha de la cita</th>
+                            <th>Motivo</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th th class="fototable">img</th>
+                            <th>img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>
@@ -120,15 +120,15 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
                             <th>Nombre</th>
-                            <th>Fecha</th>
+                            <th>Fecha de la cita</th>
                             <th>Motivo</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="fototable">img</th>
+                            <th>img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>

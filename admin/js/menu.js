@@ -48,3 +48,62 @@ boton_tema_normal.addEventListener('click', function () {
       boton_tema_normal.classList.remove("v");
 });
 
+document.getElementById('formCrearPaciente').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevenir el envío del formulario
+  
+      // Crear un objeto FormData y agregar los datos del formulario
+      var formData = new FormData(document.getElementById('formCrearPaciente'));
+  
+      // Crear un nuevo objeto XMLHttpRequest
+      var xhr = new XMLHttpRequest();
+      
+      // Configurar la solicitud POST
+      xhr.open('POST', 'NuevoPaciente.php', true);
+  
+      // Configurar la respuesta de la solicitud
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              // Manejar la respuesta del servidor
+              console.log(xhr.responseText); // Imprimir la respuesta del servidor
+              alert(xhr.responseText); // Mostrar la respuesta al usuario (opcional)
+          }
+      };
+  
+      // Enviar la solicitud con los datos del formulario (incluyendo la imagen)
+      xhr.send(formData);
+  });
+
+
+  
+function obtenerUsuariosRecientes() {
+    
+      var xhr = new XMLHttpRequest();
+  
+      
+      xhr.open('GET', './verPacientes/pacientes.php', true); 
+  
+      
+      xhr.onload = function () {
+          if (xhr.status === 200) {
+              document.getElementById('todo_pacientes').innerHTML = xhr.responseText;
+              
+              console.log(xhr.response);
+              
+          } else {
+              
+              alert('Error al cargar los usuarios.');
+          }
+      };
+      
+      xhr.onerror = function () {
+          alert('Error de conexión con el servidor.');
+      };
+  
+      
+      xhr.send();
+  }
+
+  window.onload = function () {
+      obtenerUsuariosRecientes();
+  };
+  

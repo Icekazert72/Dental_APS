@@ -263,8 +263,7 @@ th.osc {
     display: block;
 }
 
-.stock {
-}
+.stock {}
 
 .tarjeta_paciente {
     display: flex;
@@ -322,6 +321,7 @@ th.osc {
             thead {
                 display: flex;
                 justify-content: center;
+                flex-direction: column;
                 align-items: center;
                 width: 100%;
 
@@ -354,6 +354,7 @@ th.osc {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                flex-direction: column;
                 width: 100%;
 
 
@@ -371,6 +372,10 @@ th.osc {
                         justify-content: center;
                         align-items: center;
                         width: 100%;
+
+                        img {
+                            width: 100%;
+                        }
                     }
 
                     .fototable {
@@ -387,9 +392,11 @@ th.osc {
         border-radius: 20px;
         background-color: transparent;
     }
-    .paneles::-webkit-scrollbar:window-inactive{
+
+    .paneles::-webkit-scrollbar:window-inactive {
         display: none;
     }
+
     .paneles::-webkit-scrollbar-thumb {
         background-color: aquamarine;
         border-radius: 6px;
