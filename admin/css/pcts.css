@@ -166,7 +166,7 @@ main .panel_estado .menu_trat input:hover {
     display: block;
 }
 
-.panel_nuevos.ocultar {
+.panel_todas.ocultar {
     display: none;
 }
 
@@ -401,4 +401,24 @@ th.osc {
         background-color: aquamarine;
         border-radius: 6px;
     }
+}
+
+.estado-confirmada {
+    background-color: rgb(0, 200, 0, 0.5);
+    color: white;
+}
+
+.estado-cancelada {
+    background-color: rgb(255, 0, 0, 0.5);
+    color: white;
+}
+
+.estado-pendiente {
+    background-color: rgb(255, 255, 0, 0.5);
+    color: black;
+}
+
+.estado-completada {
+    background-color: gray;
+    color: white;
 }

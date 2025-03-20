@@ -1,12 +1,4 @@
-<?php
 
-require_once("../bbdd/bbdd.php");
-
-$Pacientes = "SELECT id_paciente, nombre, apellido, dni FROM paciente";
-$queryPaciente = mysqli_query($conexion, $Pacientes);
-$VerPacientes = mysqli_num_rows($queryPaciente);
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -174,16 +166,20 @@ $VerPacientes = mysqli_num_rows($queryPaciente);
                             <th class="fototable">Foto</th>
                             <th>Nombre</th>
                             <th>Apelldo</th>
+                            <th>Servicio</th>
                             <th>Estado</th>
+                            <th>Asignacion</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="tratamiento">
+                        <!-- <tr>
                             <th class="fototable">img</th>
                             <th>tratamiento</th>
                             <th>Apelldo</th>
                             <th>Estado</th>
-                        </tr>
+                            <th>Estado</th>
+                            <th>Estado</th>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -214,6 +210,7 @@ $VerPacientes = mysqli_num_rows($queryPaciente);
 
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/menu.js"></script>
+    <script src="../js/tratamiento.js"></script>
 </body>
 
 </html>

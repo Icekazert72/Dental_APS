@@ -5,34 +5,39 @@ const confirmadas = document.getElementById("confirmacion_abrir"),
     pendientes = document.getElementById("pendientes_abrir"),
     panel_pendientes = document.getElementById("panel_pendientes"),
     menu = document.getElementById("cerrarMenu"),
-    panel_nuevo = document.getElementById("panel_nuevos");
+    panel_todas = document.getElementById("panel_todas");
 
 confirmadas.addEventListener('click', function () {
     panel_confirmadas.classList.add("ver");
     panel_citas.classList.remove("ver");
     panel_pendientes.classList.remove("ver");
-    panel_nuevo.classList.add("ocultar");
+    panel_todas.classList.add("ocultar");
+    console.log('confirmadas');
+    
 });
 
 citas.addEventListener('click', function () {
     panel_citas.classList.add("ver");
     panel_pendientes.classList.remove("ver");
     panel_confirmadas.classList.remove("ver");
-    panel_nuevo.classList.add("ocultar");
+    panel_todas.classList.add("ocultar");
+    console.log('citas');
 });
 
 pendientes.addEventListener('click', function () {
     panel_pendientes.classList.add("ver");
     panel_confirmadas.classList.remove("ver");
     panel_citas.classList.remove("ver");
-    panel_nuevo.classList.add("ocultar");
+    panel_todas.classList.add("ocultar");
+    console.log('pendientes');
 });
 
 menu.addEventListener('click', function () {
     panel_pendientes.classList.remove("ver");
     panel_confirmadas.classList.remove("ver");
     panel_citas.classList.remove("ver");
-    panel_nuevo.classList.remove("ocultar");
+    panel_todas.classList.remove("ocultar");
+    console.log('menu');
 });
 
 const boton_tema_oscuro = document.getElementById("boton-tema-oscuro"),

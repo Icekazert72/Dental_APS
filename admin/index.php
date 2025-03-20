@@ -1,3 +1,34 @@
+<?php
+
+include_once('conexion/conexion.php');
+
+
+
+$sql = "SELECT COUNT(id_paciente) FROM pacientes"; 
+$resultado = mysqli_query($conexion, $sql);
+
+if ($resultado) {
+    $pacientes = mysqli_fetch_row($resultado);  
+    $total_pacientes = $pacientes[0];  
+} else {
+    $total_pacientes = 0; 
+}
+
+
+$sql_citas = "SELECT COUNT(id_cita) FROM citas";
+$resultado_citas = mysqli_query($conexion, $sql_citas);
+
+if ($resultado_citas) {
+    $pacientes_citas = mysqli_fetch_row($resultado_citas);  
+    $total_pacientes_citas = $pacientes_citas[0];  
+} else {
+    $total_pacientes_citas = 0; 
+}
+
+mysqli_close($conexion);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +40,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/Es.css">
     <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="../css/sweetalert2.css">
     <link rel="shortcut icon" href="./img/Logo2.png" type="image/x-icon">
 </head>
 
@@ -111,7 +143,7 @@
                     <h5>PACIENTES</h5>
                 </div>
                 <div><span>
-                        <h2>0</h2>
+                        <h2><?php echo $total_pacientes; ?></h2>
                     </span></div>
             </div>
             <div class="panel panel-farmaco">
@@ -127,7 +159,7 @@
                     <h5>CITAS</h5>
                 </div>
                 <div><span>
-                        <h2>0</h2>
+                        <h2><?php echo $total_pacientes_citas; ?></h2>
                     </span></div>
             </div>
             <div class="panel panel-consultas">
@@ -179,19 +211,22 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Foto</th>
                             <th>Nombre</th>
-                            <th>Apelldo</th>
+                            <th>Fecha</th>
                             <th>Motivo</th>
+                            <th>Confirma o Eliminar ?</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="citas_recientes">
+                        <!-- <tr>
                             <th>img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
-                            <th>Acciones</th>
-                        </tr>
+                            <th style="gap:5px; ">
+                                <div class="btn btn-success" id="confirmar" style="color:orange;  background-color: acuamarine;" onclick="confirmar('#')"><i style="color: white;" class="fa-solid fa-check"></i></div>
+                                <div class="btn" id="eliminar" style="color: white; background-color: red;" onclick="eliminar('#')"><i style="color: white;" class="fa-solid fa-xmark"></i></div>
+                            </th>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -223,6 +258,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/principal.js"></script>
     <script src="js/usuarios_recientes.js"></script>
+    <script src="../js/sweetalert2.js"></script>
 </body>
 
 </html>

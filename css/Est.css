@@ -347,7 +347,7 @@ footer {
 /* Estilo para la capa de Enlaces Importantes */
 .footer-links {
     width: 100%;
-    background-color: #f39c12; 
+    background-color: rgb(0, 255, 255, 0.50); 
     display: flex;
     justify-content: space-between;
     padding: 20px;
@@ -410,7 +410,7 @@ footer {
 }
 
 .social-icon:hover {
-    background-color: #f39c12;
+    background-color: rgb(0, 255, 255, 0.50);
 }
 
 /* Estilo para la capa de Mapa */
@@ -465,7 +465,7 @@ footer {
 }
 
 .btn:hover {
-    background-color: #e67e22;
+    background-color: rgb(0, 255, 255, 0.50);
 }
 
 /* Estilo para la capa de Derechos de Autor */

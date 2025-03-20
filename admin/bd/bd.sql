@@ -38,6 +38,7 @@ CREATE TABLE Citas (
         'Cancelada',
         'Completada'
     ),
+    servicio VARCHAR (100),
     FOREIGN KEY (id_paciente) REFERENCES Pacientes (id_paciente)
 );
 
