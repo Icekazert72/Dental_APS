@@ -1,6 +1,10 @@
 <?php
 include '../conexion/conexion.php';
 
+if (isset($_SESSION['tipo_usuario']) == 'enfermera' && isset($_SESSION['tipo_usuario']) == 'otros' ) {
+    header('location:../../../../../Dental_APS/index.php');
+}
+
 $num_citas = 0;
 $num_pacientes = 0;
 
@@ -74,16 +78,8 @@ mysqli_close($conexion);
             opacity: 0.8;
             transition: 1s;
         }
-        .card:hover .card-body::after {
-            content: 'Click para ver tabla';
-            display: block;
-            color: #fff;
-            font-size: 0.9em;
-            margin-top: 10px;
-            transition: 1s;
-        }
         .table-container {
-            height: 300px;
+            height: 220px;
             overflow-y: scroll;
         }
     </style>
@@ -109,7 +105,7 @@ mysqli_close($conexion);
                     <a class="nav-link" href="#">Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cerrar Sesión</a>
+                    <a class="nav-link" href="../../../Dental_APS/index.php">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -118,7 +114,7 @@ mysqli_close($conexion);
         <h1 class="mt-5">Dashboard Médico</h1>
         <div class="row mb-4">
             <div class="col-md-6">
-                <div class="card text-white bg-info mb-3" onclick="showTable('citas')">
+                <div class="card text-white bg-info mb-3"">
                     <div class="card-header">Número de Citas</div>
                     <div class="card-body">
                         <h5 class="card-title" id="num_citas"><?php echo $num_citas; ?></h5>
@@ -126,7 +122,7 @@ mysqli_close($conexion);
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card text-white bg-success mb-3" onclick="showTable('pacientes')">
+                <div class="card text-white bg-success mb-3"">
                     <div class="card-header">Número de Pacientes</div>
                     <div class="card-body">
                         <h5 class="card-title" id="num_pacientes"><?php echo $num_pacientes; ?></h5>
@@ -135,7 +131,7 @@ mysqli_close($conexion);
             </div>
         </div>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="pacientes" role="tabpanel">
+            <div class="" id="pacientes" role="tabpanel">
                 <h3 class="mt-4">Tabla de Pacientes</h3>
                 <div class="table-container">
                     <table class="table table-bordered">
@@ -154,15 +150,13 @@ mysqli_close($conexion);
                     </table>
                 </div>
             </div>
-            <div class="tab-pane" id="citas" role="tabpanel">
+            <div class="" id="citas" role="tabpanel">
                 <h3 class="mt-4">Tabla de Citas</h3>
                 <div class="table-container">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>ID Cita</th>
                                 <th>ID Paciente</th>
-                                <th>ID Médico</th>
                                 <th>Fecha y Hora</th>
                                 <th>Motivo</th>
                                 <th>Estado</th>
@@ -267,129 +261,214 @@ mysqli_close($conexion);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/sweetalert2.js"></script>
+    
     <script>
-        function showTable(tableId) {
-            $('.tab-pane').removeClass('show active');
-            $('#' + tableId).addClass('show active');
-            if (tableId === 'pacientes') {
-                loadPacientes();
-            } else if (tableId === 'citas') {
-                loadCitas();
-            }
+    function showTable(tableId) {
+        $('.tab-pane').removeClass('show active');
+        $('#' + tableId).addClass('show active');
+        if (tableId === 'pacientes') {
+            loadPacientes();
+        } else if (tableId === 'citas') {
+            loadCitas();
         }
+    }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            function loadPacientes() {
-                const xhr = new XMLHttpRequest();
-                xhr.open('GET', 'load_pacientes.php', true);
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        const data = JSON.parse(xhr.responseText);
-                        const pacientesBody = document.getElementById('pacientesBody');
-                        pacientesBody.innerHTML = '';
-                        data.forEach(paciente => {
-                            const row = document.createElement('tr');
-                            row.innerHTML = `
-                                <td>${paciente.id_paciente}</td>
-                                <td>${paciente.nombre}</td>
-                                <td>${paciente.apellidos}</td>
-                                <td>${paciente.email}</td>
-                                <td>${paciente.telefono}</td>
-                            `;
-                            pacientesBody.appendChild(row);
-                        });
-                    }
-                };
-                xhr.send();
+    document.addEventListener('DOMContentLoaded', function() {
+        // Función para cargar pacientes
+        function loadPacientes() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'load_pacientes.php', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            try {
+                const data = JSON.parse(xhr.responseText);
+
+                // Verificar si los datos tienen la propiedad "error"
+                if (data.error) {
+                    console.error('Error del servidor:', data.error);
+                    Swal.fire('Error', 'Error al cargar los pacientes: ' + data.error, 'error');
+                    return;
+                }
+
+                // Verificar que la respuesta sea un array
+                if (!Array.isArray(data)) {
+                    console.error('Los datos recibidos no son un arreglo válido');
+                    Swal.fire('Error', 'Hubo un error al procesar los pacientes.', 'error');
+                    return;
+                }
+
+                // Mostrar los datos en la tabla
+                const pacientesBody = document.getElementById('pacientesBody');
+                pacientesBody.innerHTML = ''; // Limpiar tabla antes de agregar filas
+                data.forEach(paciente => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${paciente.id_paciente}</td>
+                        <td>${paciente.nombre}</td>
+                        <td>${paciente.apellidos}</td>
+                        <td>${paciente.email}</td>
+                        <td>${paciente.telefono}</td>
+                    `;
+                    pacientesBody.appendChild(row);
+                });
+
+            } catch (e) {
+                console.error('Error al procesar la respuesta JSON:', e);
+                Swal.fire('Error', 'Error al procesar los datos de pacientes.', 'error');
             }
+        } else {
+            console.error('Error en la solicitud de pacientes:', xhr.status, xhr.statusText);
+            Swal.fire('Error', 'No se pudo cargar la tabla de pacientes.', 'error');
+        }
+    };
+    xhr.onerror = function() {
+        console.error('Error de red al cargar pacientes.');
+        Swal.fire('Error', 'Error de red al intentar cargar los pacientes.', 'error');
+    };
+    xhr.send();
+}
 
-            function loadCitas() {
-                const xhr = new XMLHttpRequest();
-                xhr.open('GET', 'load_citas.php', true);
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        const data = JSON.parse(xhr.responseText);
-                        const citasBody = document.getElementById('citasBody');
-                        citasBody.innerHTML = '';
-                        data.forEach(cita => {
-                            const row = document.createElement('tr');
-                            row.innerHTML = `
-                                <td>${cita.id_cita}</td>
-                                <td>${cita.id_paciente}</td>
-                                <td>${cita.id_medico}</td>
-                                <td>${cita.fecha_hora}</td>
-                                <td>${cita.motivo}</td>
-                                <td>${cita.estado}</td>
-                            `;
-                            citasBody.appendChild(row);
-                        });
-                    }
-                };
-                xhr.send();
+
+        // Función para cargar citas
+        function loadCitas() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'load_citas.php', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            try {
+                const data = JSON.parse(xhr.responseText);
+
+                // Verificar si los datos contienen un error
+                if (data.error) {
+                    console.error('Error del servidor:', data.error);
+                    Swal.fire('Error', 'Error al cargar las citas: ' + data.error, 'error');
+                    return;
+                }
+
+                // Verificar que la respuesta sea un array
+                if (!Array.isArray(data)) {
+                    console.error('Los datos recibidos no son un arreglo válido');
+                    Swal.fire('Error', 'Hubo un error al procesar las citas.', 'error');
+                    return;
+                }
+
+                // Mostrar las citas en la tabla
+                const citasBody = document.getElementById('citasBody');
+                citasBody.innerHTML = ''; // Limpiar tabla antes de agregar filas
+                data.forEach(cita => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${cita.id_paciente}</td>
+                        <td>${cita.fecha_hora}</td>
+                        <td>${cita.motivo}</td>
+                        <td>${cita.estado}</td>
+                    `;
+                    citasBody.appendChild(row);
+                });
+
+            } catch (e) {
+                console.error('Error al procesar la respuesta JSON:', e);
+                Swal.fire('Error', 'Error al procesar los datos de citas.', 'error');
             }
+        } else {
+            console.error('Error en la solicitud de citas:', xhr.status, xhr.statusText);
+            Swal.fire('Error', 'No se pudo cargar la tabla de citas.', 'error');
+        }
+    };
+    xhr.onerror = function() {
+        console.error('Error de red al cargar citas.');
+        Swal.fire('Error', 'Error de red al intentar cargar las citas.', 'error');
+    };
+    xhr.send();
+}
 
-            document.getElementById('searchForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const searchValue = document.getElementById('search').value;
-                const xhr = new XMLHttpRequest();
-                xhr.open('GET', `buscar_paciente.php?search=${searchValue}`, true);
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        const data = JSON.parse(xhr.responseText);
-                        const resultsBody = document.getElementById('resultsBody');
-                        resultsBody.innerHTML = '';
-                        data.forEach(paciente => {
-                            const row = document.createElement('tr');
-                            row.innerHTML = `
-                                <td>${paciente.id_paciente}</td>
-                                <td>${paciente.nombre}</td>
-                                <td>${paciente.apellidos}</td>
-                                <td>${paciente.email}</td>
-                                <td>${paciente.telefono}</td>
-                            `;
-                            resultsBody.appendChild(row);
-                        });
-                    }
-                };
-                xhr.send();
-            });
 
-            document.getElementById('consultaForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(document.getElementById('consultaForm'));
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'registrar_consulta.php', true);
-                xhr.onload = function() {
-                    const response = JSON.parse(xhr.responseText);
-                    if (xhr.status === 200) {
-                        Swal.fire(response.message, '', 'success');
-                        document.getElementById('consultaForm').reset();
-                    } else {
-                        Swal.fire(response.message, '', 'error');
-                    }
-                };
-                xhr.send(formData);
-            });
+loadCitas();
+loadPacientes();
 
-            document.getElementById('recetaForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(document.getElementById('recetaForm'));
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'dar_receta.php', true);
-                xhr.onload = function() {
-                    const response = JSON.parse(xhr.responseText);
-                    if (xhr.status === 200) {
-                        Swal.fire(response.message, '', 'success');
-                        document.getElementById('recetaForm').reset();
-                    } else {
-                        Swal.fire(response.message, '', 'error');
-                    }
-                };
-                xhr.send(formData);
-            });
-
-            window.showTable = showTable; // Ensure showTable is available globally
+        // Función para la búsqueda de pacientes
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchValue = document.getElementById('search').value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `buscar_paciente.php?search=${searchValue}`, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    const resultsBody = document.getElementById('resultsBody');
+                    resultsBody.innerHTML = '';
+                    data.forEach(paciente => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${paciente.id_paciente}</td>
+                            <td>${paciente.nombre}</td>
+                            <td>${paciente.apellidos}</td>
+                            <td>${paciente.email}</td>
+                            <td>${paciente.telefono}</td>
+                        `;
+                        resultsBody.appendChild(row);
+                    });
+                } else {
+                    console.error('Error en la solicitud de búsqueda de pacientes:', xhr.status, xhr.statusText);
+                    Swal.fire('Error', 'No se pudo realizar la búsqueda de pacientes.', 'error');
+                }
+            };
+            xhr.onerror = function() {
+                console.error('Error de red al buscar pacientes.');
+                Swal.fire('Error', 'Error de red al intentar buscar los pacientes.', 'error');
+            };
+            xhr.send();
         });
-    </script>
+
+        // Función para registrar una consulta
+        document.getElementById('consultaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById('consultaForm'));
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'registrar_consulta.php', true);
+            xhr.onload = function() {
+                const response = JSON.parse(xhr.responseText);
+                if (xhr.status === 200) {
+                    Swal.fire(response.message, '', 'success');
+                    document.getElementById('consultaForm').reset();
+                } else {
+                    Swal.fire(response.message, '', 'error');
+                }
+            };
+            xhr.onerror = function() {
+                Swal.fire('Error', 'Hubo un error al registrar la consulta', 'error');
+                console.error('Error de red al registrar consulta:', xhr.status, xhr.statusText);
+            };
+            xhr.send(formData);
+        });
+
+        // Función para registrar una receta
+        document.getElementById('recetaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById('recetaForm'));
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'dar_receta.php', true);
+            xhr.onload = function() {
+                const response = JSON.parse(xhr.responseText);
+                if (xhr.status === 200) {
+                    Swal.fire(response.message, '', 'success');
+                    document.getElementById('recetaForm').reset();
+                } else {
+                    Swal.fire(response.message, '', 'error');
+                }
+            };
+            xhr.onerror = function() {
+                Swal.fire('Error', 'Hubo un error al dar la receta', 'error');
+                console.error('Error de red al dar receta:', xhr.status, xhr.statusText);
+            };
+            xhr.send(formData);
+        });
+
+        window.showTable = showTable; // Asegura que showTable esté disponible globalmente
+    });
+       
+</script>
+
+
 </body>
 </html>

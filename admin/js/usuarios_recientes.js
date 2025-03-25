@@ -85,6 +85,9 @@ function confirmar(id_cita) {
                     text: 'La cita ha sido confirmada correctamente.',
                     confirmButtonText: 'Aceptar'
                 });
+                setInterval(function () {
+                    loadCitas();
+                }, 10000);
             } else {
 
                 Swal.fire({
@@ -93,6 +96,9 @@ function confirmar(id_cita) {
                     text: 'Hubo un error al confirmar la cita.',
                     confirmButtonText: 'Intentar nuevamente'
                 });
+                setInterval(function () {
+                    loadCitas();
+                }, 10000);
             }
         }
     };
@@ -101,7 +107,7 @@ function confirmar(id_cita) {
 
 
 function eliminar(id_cita) {
-    let inputOM = document.getElementById('jhhhh').value= id_cita;
+    // let inputOM = document.getElementById('jhhhh').value= id_cita;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', './php/verPacientes/update_cita.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

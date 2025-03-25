@@ -118,7 +118,7 @@ document.getElementById('formLog').addEventListener('submit', function(e) {
                             window.location.href = "../../../Dental_APS/admin/index.php"; 
                             break;
                         case 'medico':
-                            window.location.href = "../../../Dental_APS/admin/index.php"; 
+                            window.location.href = "../../../Dental_APS/admin/dashboard_Medico/index.php"; 
                             break;
                         case 'enfermera':
                             window.location.href = "../../../Dental_APS/admin/index.php"; 

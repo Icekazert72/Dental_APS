@@ -52,43 +52,37 @@
 
         <div class="pnls mt-3">
             <div class="paneles panel_consultas" id="panel_consultas">
-                <table>
-                    <thead>
-                        <tr>
-                            <th th class="fototable">Foto</th>
-                            <th>Nombre</th>
-                            <th>Dia</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th th class="fototable">img</th>
-                            <th>Todos</th>
-                            <th>Apelldo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </tbody>
-                </table>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre Paciente</th>
+                                <th>Nombre Medico</th>
+                                <th>Notas</th>
+                                <th>Diagnostico</th>
+                                <th>Tratamientos</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all_consultas">
+                            <!-- Las consultas se cargarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="paneles panel_diarias" id="panel_diarias">
                 <table>
                     <thead>
                         <tr>
-                        <th th class="fototable">Foto</th>
-                            <th>Nombre</th>
-                            <th>Dia</th>
-                            <th>Estado</th>
+                            <th>Nombre Paciente</th>
+                            <th>Nombre Medico</th>
+                            <th>Notas</th>
+                            <th>Diagnostico</th>
+                            <th>Tratamientos</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th th class="fototable">img</th>
-                            <th>Todos</th>
-                            <th>Apelldo</th>
-                            <th>Acciones</th>
-                        </tr>
+                    <tbody id="all_diarias">
+                        <!-- Las consultas diarias se cargarán aquí dinámicamente -->
                     </tbody>
                 </table>
             </div>
@@ -98,6 +92,33 @@
 
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/menu_consultas.js"></script>
+    <script>
+        function cargarConsultas() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '../php/obtener_consultas.php', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById('all_consultas').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        function cargarConsultasDiarias() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '../php/obtener_consultas_diarias.php', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById('all_diarias').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Llamar a las funciones al cargar la página
+        cargarConsultas();
+        cargarConsultasDiarias();
+    </script>
 </body>
 
 </html>

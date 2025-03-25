@@ -173,28 +173,28 @@ session_start();
                 <div class="card">
                     <div class="card-image" style="background-image: url('./img/Dioni.png');"></div>
                     <div class="card-info">
-                        <h3>Dr. Juan Pérez</h3>
+                        <h3>Dr. Antonio Ruben</h3>
                         <p>Especialidad: Cardiología</p>
-                        <p>Teléfono: +123 456 789</p>
-                        <p>Email: juan.perez@example.com</p>
+                        <p>Teléfono: +240 222 123 123</p>
+                        <p>Email: antonio@gmail.com</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-image" style="background-image: url('./img/AlfonsoHerrero.png');"></div>
                     <div class="card-info">
-                        <h3>Dr. María López</h3>
-                        <p>Especialidad: Pediatría</p>
-                        <p>Teléfono: +987 654 321</p>
-                        <p>Email: maria.lopez@example.com</p>
+                        <h3>Dr. Antonio Ruben</h3>
+                        <p>Especialidad: Cardiología</p>
+                        <p>Teléfono: +240 222 123 123</p>
+                        <p>Email: antonio@gmail.com</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-image" style="background-image: url('./img/KevinMedina.png');"></div>
                     <div class="card-info">
-                        <h3>Dr. Carlos Martínez</h3>
-                        <p>Especialidad: Neurología</p>
-                        <p>Teléfono: +111 222 333</p>
-                        <p>Email: carlos.martinez@example.com</p>
+                        <h3>Dr. Antonio Ruben</h3>
+                        <p>Especialidad: Cardiología</p>
+                        <p>Teléfono: +240 222 123 123</p>
+                        <p>Email: antonio@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@ session_start();
                 <div class="col-md-3 footer-section">
                     <h3>Contacto</h3>
                     <p><strong>Dirección:</strong> Calle Ejemplo 123, Ciudad, País</p>
-                    <p><strong>Teléfono:</strong> +123 456 789</p>
+                    <p><strong>Teléfono:</strong> +240 222 000 000</p>
                     <p><strong>Email:</strong> contacto@dapsclinica.com</p>
                     <p><strong>Emergencias:</strong> +123 456 789 (24h)</p>
                 </div>

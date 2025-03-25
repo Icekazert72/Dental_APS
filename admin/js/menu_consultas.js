@@ -35,3 +35,5 @@ boton_tema_normal.addEventListener('click', function () {
     boton_tema_oscuro.classList.remove("x");
     boton_tema_normal.classList.remove("v");
 });
+
+

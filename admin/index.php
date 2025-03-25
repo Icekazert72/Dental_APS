@@ -4,9 +4,10 @@ session_start();
 
 include_once('conexion/conexion.php');
 
-if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
+if (!$_SESSION['nombre'] && !$_SESSION['telefono'] && isset($_SESSION['tipo_usuario']) == 'medico') {
     header('location:../../../index.php');
 }
+
 
 $sql = "SELECT COUNT(id_paciente) FROM pacientes";
 $resultado = mysqli_query($conexion, $sql);
@@ -38,6 +39,16 @@ if ($resultado_farmacos) {
     $total_farmacos = $farmacos[0];
 } else {
     $total_farmacos = 0;
+}
+
+$sql_consultas = "SELECT COUNT(id_consulta) FROM consultas";
+$resultado_consultas = mysqli_query($conexion, $sql_consultas);
+
+if ($resultado_consultas) {
+    $consultas = mysqli_fetch_row($resultado_consultas);
+    $total_consultas = $consultas[0];
+} else {
+    $total_consultas = 0;
 }
 
 mysqli_close($conexion);
@@ -182,7 +193,7 @@ mysqli_close($conexion);
                     <h5>CONSULTAS</h5>
                 </div>
                 <div><span>
-                        <h2>0</h2>
+                        <h2><?php echo $total_consultas; ?></h2>
                     </span></div>
             </div>
         </div>
@@ -346,6 +357,7 @@ mysqli_close($conexion);
 
                     // Llamar a resizeChart inmediatamente para que el gráfico tenga el tamaño correcto al cargar
                     resizeChart();
+                    
                 }
             };
             xhr.send();

@@ -2,11 +2,21 @@
 
 session_start();
 
-if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
-    header('location:../index.php');
+
+
+require_once '../admin/conexion/conexion.php';
+
+$idPaciente = $_SESSION['id_paciente'];
+$receta = null;
+
+if ($idPaciente) {
+    $receta = getRecetaByPacienteId($conexion, $idPaciente);
 }
 
-
+$isNuevaReceta = false;
+if ($idPaciente) {
+    $isNuevaReceta = isRecetaNueva($conexion, $idPaciente);
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +32,18 @@ if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="../css/fontawesome.min.css">
     <link rel="stylesheet" href="../css/sweetalert2.css">
+    <style>
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        #notificacionReceta {
+            display: none;
+            animation: blink 1s infinite;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,8 +64,9 @@ if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
                 <div class="nav">
                     <div class="navs">
                         <div class="vn"><a href="../index.php">Inicio</a></div>
-                        <div class="vn"><a href="">Servicios</a></div>
-                        <div class="vn"><a href="">Sobre Nosotros</a></div>
+                    </div>
+                    <div class="navs">
+                        <button id="cerrarSesionBtn" class="btn" style="margin-left: 10px; color: red;"><strong>Cerrar sesión</strong></button>
                     </div>
                     <div class="burger btn"><i class="fa-solid fa-bars"></i></div>
                 </div>
@@ -53,52 +76,12 @@ if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
                 </div>
             </div>
         </div>
+        <div id="notificacionReceta" class="alert alert-info" style="display: <?php echo $isNuevaReceta ? 'block' : 'none'; ?>;">
+            <strong>Nueva receta disponible!</strong>
+        </div>
     </header>
 
     <main class="container mt-3">
-
-
-
-        <div class="menu_panel">
-            <div class="card">
-                <div class="card-header">
-                    Mi historial Medico
-                </div>
-                <div class="card-body" style="background-color: transparent;">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary"><i class="fa-regular fa-heart"></i> Ver</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    Citas
-                </div>
-                <div class="card-body" style="background-color: transparent;">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-notes-medical"></i> Solicitar</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    Gestion de plantilla
-                </div>
-                <div class="card-body" style="background-color: transparent;">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-clipboard"></i></a>
-                    <button type="button" class="btn btn-primary position-relative">
-                        Mensage <i class="fa-solid fa-box"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        </div>
 
         <div class="container-ms mt-5 mb-5">
             <label for="exampleInputPassword1" class="form-label">
@@ -190,7 +173,6 @@ if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
                             </div>
                             <div class="card-footer text-center">
                                 <button class="btn btn-primary" onclick="window.location.href='perfil.html'">Ver perfil</button>
-                                <button id="cerrarSesionBtn" class="btn btn-danger">Cerrar sesión</button>
                             </div>
                         </div>
                     </div>
@@ -219,6 +201,28 @@ if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
                 </div>
             </div>
 
+            <div class="container my-5">
+                <h2 class="text-center mb-4">Receta del Paciente</h2>
+
+                <!-- Panel para la receta -->
+                <div id="recetaPaciente" class="card" style="display: <?php echo $receta ? 'block' : 'none'; ?>;">
+                    <div class="card-header bg-dark text-white">
+                        <h5>Detalles de la Receta</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Fecha:</strong> <span id="recetaFecha"><?php echo $receta['fecha_hora'] ?? '--'; ?></span></p>
+                        <p><strong>Diagnóstico:</strong> <span id="recetaDiagnostico"><?php echo $receta['diagnostico'] ?? '--'; ?></span></p>
+                        <p><strong>Tratamiento:</strong> <span id="recetaTratamiento"><?php echo $receta['tratamiento'] ?? '--'; ?></span></p>
+                        <p><strong>Notas:</strong> <span id="recetaNotas"><?php echo $receta['notas'] ?? '--'; ?></span></p>
+                        <button id="vistoBtn" class="btn btn-success">Visto</button>
+                    </div>
+                </div>
+
+                <?php if (!$receta): ?>
+                    <div class="alert alert-warning text-center">Sin recetas</div>
+                <?php endif; ?>
+            </div>
+
         </div>
 
         <div id="loadingSpinner" style="display: none;">
@@ -234,7 +238,7 @@ if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/sweetalert2.js"></script>
     <script>
-        window.onload = function () {
+        window.onload = function() {
             loadHistorial();
             loadCitas(); // Llamada para cargar las citas del paciente
         }
