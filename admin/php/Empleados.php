@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/pcts.css">
     <link rel="stylesheet" href="../css/fontawesome.min.css">
+    <link rel="stylesheet" href="../css/sweetalert2.css">
     <link rel="shortcut icon" href="../img/Logo2.png" type="image/x-icon">
 </head>
 
@@ -21,7 +22,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <div class="logo_ini"><img src="../img/Logo2.png" alt="" width="35px"><a class="navbar-brand" href="../index.php"><strong>APS</strong></a></div>
+                    <div class="logo_ini"><img src="../img/Logo2.png" alt="" width="35px"><a class="navbar-brand" href="../index.php"><strong><i class="fa-solid fa-angle-left"></i></strong></a></div>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item perfil_usuario">
                             <div><img src="../img/Logo2.png" width="28px" alt=""></div>
@@ -31,12 +32,12 @@
                         <li class="nav-item crear_usuario">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-color-principal btn-modal-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fa-solid fa-users-rectangle"></i><span> Nuevo Empleado</span>
+                                <i class="fa-solid fa-users-rectangle"></i> <span>Nuevo Usuario</span>
                             </button>
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Empleado</h1>
@@ -44,63 +45,83 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            <form class="row g-3 needs-validation" novalidate method="post" action="NuevoPaciente.php" enctype="multipart/form-data">
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom01" class="form-label">Nombre</label>
-                                                    <input type="text" class="form-control" id="validationCustom01" name="nombre" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
+                                            <div class="container mt-5">
+                                                <h2 class="mb-4 text-center">Formulario de Registro</h2>
+                                                <form id="registroForm" action="registrar_usuario.php" method="POST">
+                                                    <div class="row mb-3">
+                                                        <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Apellido</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="apellido" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
+
+                                                    <div class="row mb-3">
+                                                        <label for="apellidos" class="col-sm-2 col-form-label">Apellidos:</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">DNI</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="numero" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
+
+                                                    <div class="row mb-3">
+                                                        <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="email" class="form-control" id="email" name="email" required>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Fecha</label>
-                                                    <input type="date" class="form-control" id="validationCustom02" name="fecha" required>
-                                                </div>
+                                                    <div class="row mb-3">
+                                                        <label for="telefono" class="col-sm-2 col-form-label">Teléfono:</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="telefono" name="telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Profesion</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="profesion" required>
-                                                </div>
+                                                    <div class="row mb-3">
+                                                        <label for="tipo_usuario" class="col-sm-2 col-form-label">Tipo de Usuario:</label>
+                                                        <div class="col-sm-10">
+                                                            <select id="tipo_usuario" name="tipo_usuario" class="form-select" onchange="toggleMedicoFields()" required>
+                                                                <option value="admin">Admin</option>
+                                                                <option value="medico">Medico</option>
+                                                                <option value="enfermera">Enfermera</option>
+                                                                <option value="otro">Otro</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Oreganizacion</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="organizacion" required>
-                                                </div>
+                                                    <!-- Campos para médicos -->
+                                                    <div id="medicoFields" style="display:none;">
+                                                        <div class="row mb-3">
+                                                            <label for="especialidad" class="col-sm-2 col-form-label">Especialidad:</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="especialidad" name="especialidad">
+                                                            </div>
+                                                        </div>
 
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Puesto Ocupado</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="puesto" required>
-                                                </div>
+                                                        <div class="row mb-3">
+                                                            <label for="numero_licencia" class="col-sm-2 col-form-label">Número de Licencia:</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="numero_licencia" name="numero_licencia">
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Nacionalidad</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="nacionalidad" required>
-                                                </div>
+                                                    <div class="text-center">
+                                                        <button type="submit" class="btn btn-primary">Registrar</button>
+                                                    </div>
+                                                    <script>
+                                                        function toggleMedicoFields() {
+                                                            var tipo_usuario = document.getElementById('tipo_usuario').value;
+                                                            var medicoFields = document.getElementById('medicoFields');
 
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">FOTO</label>
-                                                    <input type="file" class="form-control" name="foto" id="validationCustom02" required>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <button class="btn btn-primary" type="submit">Agregar</button>
-                                                </div>
-                                            </form>
+                                                            if (tipo_usuario === 'medico') {
+                                                                medicoFields.style.display = 'block';
+                                                            } else {
+                                                                medicoFields.style.display = 'none';
+                                                            }
+                                                        }
+                                                    </script>
+                                                </form>
+                                            </div>
 
                                         </div>
                                         <div class="modal-footer">
@@ -138,19 +159,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
+                            <th>Correo Electronnico</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Targeta</th>
+                            <th>Tipo de Usuario</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="todos_usuarios">
+                        <!-- <tr>
                             <th th class="fototable">img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
-                            <th><div><i class="fa-regular fa-address-card"></i></div></th>
-                        </tr>
+                            <th></th>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -159,19 +180,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
+                            <th>Correo Electronnico</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Especialidad</th>
+                            <th>Tipo de Usuario</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="medicos">
+                        <!-- <tr>
                             <th th class="fototable">img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -180,19 +201,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
+                            <th>Correo Electronnico</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Especialidad</th>
+                            <th>Tipo de Usuario</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="enfermera">
+                        <!-- <tr>
                             <th th class="fototable">img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -202,6 +223,7 @@
 
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/menu_empleados.js"></script>
+    <script src="../js/sweetalert2.js"></script>
 </body>
 
 </html>

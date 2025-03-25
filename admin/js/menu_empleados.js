@@ -45,3 +45,171 @@ boton_tema_normal.addEventListener('click', function () {
     boton_tema_oscuro.classList.remove("x");
     boton_tema_normal.classList.remove("v");
 });
+
+
+function enviarFormulario(event) {
+    event.preventDefault(); 
+
+    var form = document.getElementById('registroForm');
+    var formData = new FormData(form); 
+
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../../admin/php/verPacientes/registrar_usuario.php", true); 
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+           
+            var respuesta = xhr.responseText;
+
+            if (respuesta.includes("registrado correctamente")) {
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: respuesta,
+                    confirmButtonText: 'Cerrar'
+                });
+                console.log(xhr.response);
+                document.getElementById('registroForm').reset();
+            } else {
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: respuesta,
+                    confirmButtonText: 'Cerrar'
+                });
+                console.log(xhr.response);
+                document.getElementById('registroForm').reset();
+            }
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: "Hubo un problema al registrar el usuario.",
+                confirmButtonText: 'Cerrar'
+            });
+            console.log(xhr.response);
+        }
+    };
+
+    xhr.send(formData); 
+
+    console.log('funcion enviar funciiona');
+    
+
+}
+
+document.getElementById('registroForm').addEventListener('submit', enviarFormulario);
+
+
+function loadUsuarios() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../../admin/php/verPacientes/loadUsuarios.php', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.response);
+            var citas = JSON.parse(xhr.responseText);
+            var tbody = document.getElementById('todos_usuarios');
+
+            if (citas.length > 0) {
+                var rows = '';
+
+
+                citas.forEach(function (usuarios) {
+                    rows += `
+                        <tr id="cita_${usuarios.id_usuario}">
+                            <th>${usuarios.email}</th>
+                            <th>${usuarios.nombre}</th>
+                            <th>${usuarios.apellidos}</th>
+                            <th>${usuarios.tipo_usuario}</th>
+                        </tr>
+                    `;
+                });
+
+
+                tbody.innerHTML = rows;
+            } else {
+
+                tbody.innerHTML = `<tr><td colspan="4">No hay citas pendientes</td></tr>`;
+            }
+        }
+    };
+    xhr.send();
+}
+function usuarioMEdico() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../../admin/php/verPacientes/usuarioMEdico.php', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.response);
+            var citas = JSON.parse(xhr.responseText);
+            var tbody = document.getElementById('medicos');
+
+            if (citas.length > 0) {
+                var rows = '';
+
+
+                citas.forEach(function (usuarios) {
+                    rows += `
+                        <tr id="cita_${usuarios.id_usuario}">
+                            <th>${usuarios.email}</th>
+                            <th>${usuarios.nombre}</th>
+                            <th>${usuarios.apellidos}</th>
+                            <th>${usuarios.tipo_usuario}</th>
+                        </tr>
+                    `;
+                });
+
+
+                tbody.innerHTML = rows;
+            } else {
+
+                tbody.innerHTML = `<tr><td colspan="4">No hay citas pendientes</td></tr>`;
+            }
+        }
+    };
+    xhr.send();
+}
+function usuarioEnfermera() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../../admin/php/verPacientes/usuarioEnfermera.php', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.response);
+            var citas = JSON.parse(xhr.responseText);
+            var tbody = document.getElementById('enfermera');
+
+            if (citas.length > 0) {
+                var rows = '';
+
+
+                citas.forEach(function (usuarios) {
+                    rows += `
+                        <tr id="cita_${usuarios.id_usuario}">
+                            <th>${usuarios.email}</th>
+                            <th>${usuarios.nombre}</th>
+                            <th>${usuarios.apellidos}</th>
+                            <th>${usuarios.tipo_usuario}</th>
+                        </tr>
+                    `;
+                });
+
+
+                tbody.innerHTML = rows;
+            } else {
+
+                tbody.innerHTML = `<tr><td colspan="4">No hay citas pendientes</td></tr>`;
+            }
+        }
+    };
+    xhr.send();
+}
+
+
+window.onload = function () {
+    loadUsuarios();
+    usuarioMEdico();
+    usuarioEnfermera();
+};

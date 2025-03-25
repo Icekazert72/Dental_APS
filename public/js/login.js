@@ -30,7 +30,7 @@ btnNoCondicion.addEventListener('click', function () {
 
 
 document.getElementById('crearCuenta').addEventListener('submit', function (e) {
-    e.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+    e.preventDefault(); 
 
     
     var checkBox = document.getElementById('exampleCheck1');
@@ -62,39 +62,102 @@ document.getElementById('crearCuenta').addEventListener('submit', function (e) {
 });
 
 
-
 document.getElementById('formLog').addEventListener('submit', function(e) {
-    e.preventDefault(); 
+    e.preventDefault();  
 
     
     var email = document.getElementById('LogEmail').value;
     var telefono = document.getElementById('LogTelefono').value;
+
+   
+    if (email === "" || telefono === "") {
+        Swal.fire({
+            title: 'Error',
+            text: 'Por favor, ingrese ambos campos de correo y teléfono.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+        return;
+    }
+
     
-  
+    document.getElementById('loadingSpinner_ini').style.display = 'flex';
+
+   
     var formData = new FormData();
     formData.append('LogEmail', email);
     formData.append('LogTelefono', telefono);
 
-    
+   
     var xhr = new XMLHttpRequest();
     xhr.open('POST', './php/loguear.php', true);
 
-   
     xhr.onload = function() {
-        if (xhr.status == 200) {
-          
-            if (xhr.responseText === "success") {
-                alert("¡Bienvenido!");
-                window.location.href = "./index.php";  
-            } else {
+        document.getElementById('loadingSpinner_ini').style.display = 'none';  
 
-                alert("Correo o teléfono incorrectos.");
-                console.log(xhr.response);
+        if (xhr.status == 200) {
+           
+            var response = xhr.responseText.trim();
+            
+            if (response === "success") {
                 
+                setTimeout(function() {
+                    window.location.href = "./index.php";  
+                }, 3000);
+            } else if (response.includes("Paciente")) {
+                
+                setTimeout(function() {
+                    window.location.href = "./index.php";  
+                }, 3000);
+            } else if (response.includes("Usuario")) {
+               
+                setTimeout(function() {
+                    var tipoUsuario = response.split(':')[1].trim(); 
+                    switch (tipoUsuario) {
+                        case 'admin':
+                            window.location.href = "../../../Dental_APS/admin/index.php"; 
+                            break;
+                        case 'medico':
+                            window.location.href = "../../../Dental_APS/admin/index.php"; 
+                            break;
+                        case 'enfermera':
+                            window.location.href = "../../../Dental_APS/admin/index.php"; 
+                            break;
+                        case 'otro':
+                            window.location.href = "../../../Dental_APS/admin/index.php"; 
+                            break;
+                        default:
+                            window.location.href = "./login.php";  
+                    }
+                }, 3000);
+            } else {
+                
+                Swal.fire({
+                    title: 'Error',
+                    text: response, 
+                    backdrop: false,
+                    position: 'center',
+                    icon: 'error',
+                    confirmButtonText: 'Intentar de nuevo'
+                });
             }
         } else {
-            alert("Ocurrió un error, intentalo de nuevo.");
+            
+            Swal.fire({
+                title: 'Error',
+                text: 'Ocurrió un error, intentalo de nuevo.',
+                backdrop: false,
+                position: 'center',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
     };
+
+
     xhr.send(formData);
 });
+
+
+
+

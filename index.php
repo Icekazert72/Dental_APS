@@ -11,6 +11,9 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dental APS</title>
+    <meta name="description" content="Clínica Dental APS, servicios dentales de calidad.">
+    <meta name="keywords" content="Dental, Clínica, Servicios Dentales, Salud">
+    <meta name="author" content="Dental APS">
 </head>
 <link rel="stylesheet" href="css/all.min.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -200,75 +203,65 @@ session_start();
     </main>
 
     <footer>
-        <div class="footer-layer">
-            <!-- Capa 1: Información de contacto -->
-            <div class="footer-contact">
-                <h3>Contacto</h3>
-                <p><strong>Dirección:</strong> Calle Ejemplo 123, Ciudad, País</p>
-                <p><strong>Teléfono:</strong> +123 456 789</p>
-                <p><strong>Email:</strong> contacto@dapsclinica.com</p>
-                <p><strong>Emergencias:</strong> +123 456 789 (24h)</p>
+        <div class="footer-container container">
+            <div class="row">
+                <!-- Información de contacto -->
+                <div class="col-md-3 footer-section">
+                    <h3>Contacto</h3>
+                    <p><strong>Dirección:</strong> Calle Ejemplo 123, Ciudad, País</p>
+                    <p><strong>Teléfono:</strong> +123 456 789</p>
+                    <p><strong>Email:</strong> contacto@dapsclinica.com</p>
+                    <p><strong>Emergencias:</strong> +123 456 789 (24h)</p>
+                </div>
+                <!-- Enlaces importantes -->
+                <div class="col-md-3 footer-section">
+                    <h3>Enlaces Importantes</h3>
+                    <ul class="footer-links" style="display: block;">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="#">Servicios</a></li>
+                        <li><a href="#">Especialidades Médicas</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <!-- Redes sociales -->
+                <div class="col-md-3 footer-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">Facebook</a>
+                        <a href="#" class="social-icon">Twitter</a>
+                        <a href="#" class="social-icon">Instagram</a>
+                        <a href="#" class="social-icon">LinkedIn</a>
+                    </div>
+                </div>
+                <!-- Mapa -->
+                <div class="col-md-3 footer-section">
+                    <h3>Visítanos</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d312.5431530426123!2d-0.12764749999999999!3d51.507351"
+                        width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </div>
-        </div>
-
-        <div class="footer-layer">
-            <!-- Capa 2: Enlaces importantes -->
-            <div class="footer-links">
-                <h3>Enlaces Importantes</h3>
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Especialidades Médicas</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Política de Privacidad</a></li>
-                    <li><a href="#">Términos de Servicio</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
+            <div class="row mt-4">
+                <!-- Suscripción al boletín -->
+                <div class="col-md-12 footer-section">
+                    <h3>Suscríbete a nuestro Boletín de Salud</h3>
+                    <form action="#" method="post" class="newsletter-form">
+                        <input type="email" placeholder="Ingresa tu correo" class="newsletter-input" required>
+                        <button type="submit" class="btn btn-primary">Suscribirse</button>
+                    </form>
+                </div>
             </div>
-        </div>
-
-        <div class="footer-layer">
-            <!-- Capa 3: Redes sociales -->
-            <div class="footer-social">
-                <h3>Síguenos</h3>
-                <div class="social-icons">
-                    <a href="#" class="social-icon">Facebook</a>
-                    <a href="#" class="social-icon">Twitter</a>
-                    <a href="#" class="social-icon">Instagram</a>
-                    <a href="#" class="social-icon">LinkedIn</a>
+            <div class="row mt-4">
+                <!-- Derechos de autor -->
+                <div class="col-md-12 footer-section text-center">
+                    <p>&copy; 2025 DAPS Clínica. Todos los derechos reservados.</p>
                 </div>
             </div>
         </div>
-
-        <div class="footer-layer">
-            <!-- Capa 4: Mapa -->
-            <div class="footer-map">
-                <h3>Visítanos</h3>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d312.5431530426123!2d-0.12764749999999999!3d51.507351"
-                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-
-        <div class="footer-layer">
-            <!-- Capa 5: Suscripción al boletín -->
-            <div class="footer-newsletter">
-                <h3>Suscríbete a nuestro Boletín de Salud</h3>
-                <form action="#" method="post">
-                    <input type="email" placeholder="Ingresa tu correo" class="newsletter-input" required>
-                    <button type="submit" class="btn">Suscribirse</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="footer-layer">
-            <!-- Capa 6: Derechos de autor -->
-            <div class="footer-copyright">
-                <p>&copy; 2025 DAPS Clínica. Todos los derechos reservados.</p>
-            </div>
-        </div>
     </footer>
-
 
     <div class="modals">
         <div class="modal fade" id="ModalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

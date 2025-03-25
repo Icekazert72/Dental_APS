@@ -27,6 +27,24 @@ CREATE TABLE Medicos (
     numero_licencia VARCHAR(50)
 );
 
+
+ALTER TABLE medicos ADD id_usuario INT;
+ALTER TABLE medicos ADD FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario);
+
+CREATE TABLE Usuarios (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    apellidos VARCHAR(100),
+    email VARCHAR(100),
+    telefono VARCHAR(15),
+    tipo_usuario ENUM('admin', 'medico', 'enfermera', 'otro'),
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO Usuarios (nombre, apellidos, email, telefono, tipo_usuario)
+VALUES ('Antonio', 'Apellido', 'antonio@correo.com', '123456789', 'admin');
+
+
 CREATE TABLE Citas (
     id_cita INT PRIMARY KEY AUTO_INCREMENT,
     id_paciente INT,
@@ -95,9 +113,28 @@ CREATE TABLE Historial_Clinico (
     id_paciente INT,
     fecha_hora DATETIME,
     notas TEXT,
+    diagnostico VARCHAR(255),
+    tratamiento VARCHAR(255),
     tipo_historial VARCHAR(50),
     FOREIGN KEY (id_paciente) REFERENCES Pacientes (id_paciente)
 );
+
+INSERT INTO Historial_Clinico (id_paciente, fecha_hora, diagnostico, tratamiento, notas, tipo_historial)
+VALUES (1, '2025-03-21 10:00:00', 'Hipertensión', 'Medicamento A, ejercicio regular', 'El paciente debe controlar su presión arterial y seguir el tratamiento indicado.', 'Consulta');
+
+
+ALTER TABLE Historial_Clinico ADD diagnostico VARCHAR(255);
+ALTER TABLE Historial_Clinico ADD tratamiento VARCHAR(255);
+
+-- CREATE TABLE Historial_Medico (
+--     id_historial INT PRIMARY KEY AUTO_INCREMENT,
+--     id_paciente INT,
+--     fecha DATE,
+--     diagnostico VARCHAR(255),
+--     tratamiento VARCHAR(255),
+--     notas TEXT,
+--     FOREIGN KEY (id_paciente) REFERENCES Pacientes (id_paciente)
+-- );
 
 CREATE TABLE Recetas (
     id_receta INT PRIMARY KEY AUTO_INCREMENT,
@@ -132,6 +169,18 @@ CREATE TABLE Facturas (
         'Cancelado'
     ),
     FOREIGN KEY (id_paciente) REFERENCES Pacientes (id_paciente)
+);
+
+CREATE TABLE Consultas (
+    id_consulta INT PRIMARY KEY AUTO_INCREMENT,
+    id_paciente INT,
+    id_medico INT,
+    fecha_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    notas TEXT,
+    diagnostico VARCHAR(255),
+    tratamiento VARCHAR(255),
+    FOREIGN KEY (id_paciente) REFERENCES Pacientes(id_paciente),
+    FOREIGN KEY (id_medico) REFERENCES Medicos(id_medico)
 );
 
 INSERT INTO

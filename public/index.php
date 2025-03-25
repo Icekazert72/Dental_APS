@@ -2,6 +2,11 @@
 
 session_start();
 
+if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
+    header('location:../index.php');
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +56,8 @@ session_start();
     </header>
 
     <main class="container mt-3">
+
+
 
         <div class="menu_panel">
             <div class="card">
@@ -129,8 +136,96 @@ session_start();
             </form>
         </div>
 
-        <div class="containet-ms">
+        <div class="container mb-5">
 
+            <!-- Contenedor principal -->
+            <div class="container">
+                <div class="row">
+                    <!-- Información del paciente -->
+                    <div class="">
+                        <div class="card" style="width: 100%; height: 100%;">
+                            <div class="card-header">
+                                <h4 class="card-title">Bienvenido, <span id="nombrePaciente"><?php echo $_SESSION['nombre'] ?> <?php echo $_SESSION['apellidos'] ?></span></h4>
+                            </div>
+                            <div class="card-body">
+                                <h5>Información personal:</h5>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>CURP:</th>
+                                        <td id="curpPaciente">ABC123456789XYZ</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha de Nacimiento:</th>
+                                        <td id="fechaNacimientoPaciente"><?php echo $_SESSION['fecha'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td id="emailPaciente"><?php echo $_SESSION['email'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Género:</th>
+                                        <td id="generoPaciente"><?php echo $_SESSION['genero'] ?></td>
+                                    </tr>
+                                </table>
+
+                                <h5>Historial Médico:</h5>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Diagnóstico</th>
+                                            <th>Tratamiento</th>
+                                            <th>Notas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="historial">
+                                        <!-- <tr>
+                                            <td>12/03/2023</td>
+                                            <td>Hipertensión</td>
+                                            <td>Medicamento A, ejercicio regular</td>
+                                            <td>El paciente debe controlar su presión arterial y seguir el tratamiento indicado.</td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-primary" onclick="window.location.href='perfil.html'">Ver perfil</button>
+                                <button id="cerrarSesionBtn" class="btn btn-danger">Cerrar sesión</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container my-5">
+                <h2 class="text-center mb-4">Mis Citas</h2>
+
+                <!-- Tabla responsiva -->
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Motivo</th>
+                                <th>Estado</th>
+                                <th>Servicio</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mis_citas">
+                            <!-- Aquí se insertan las filas dinámicamente con PHP o Backend -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="loadingSpinner" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p>Cerrando sesión...</p>
         </div>
 
     </main>
@@ -138,6 +233,12 @@ session_start();
     <script src="js/cita.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/sweetalert2.js"></script>
+    <script>
+        window.onload = function () {
+            loadHistorial();
+            loadCitas(); // Llamada para cargar las citas del paciente
+        }
+    </script>
 </body>
 
 </html>

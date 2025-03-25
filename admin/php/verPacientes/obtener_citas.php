@@ -30,12 +30,12 @@ WHERE
 
 $result = $conn->query($sql);
 
-// Arreglo para almacenar los resultados de las citas
+
 $citas = [];
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        // Almacenamos los datos de cada cita en un array
+        
         $citas[] = $row;
     }
 } else {
@@ -44,5 +44,5 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-// Retornar los datos en formato JSON
+
 echo json_encode($citas);

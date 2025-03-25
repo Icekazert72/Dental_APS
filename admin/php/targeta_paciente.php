@@ -32,7 +32,7 @@ $paciente = mysqli_fetch_assoc($query_select_paciente);
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <div class="logo_ini"><img src="../img/Logo2.png" alt="" width="35px"><a class="navbar-brand" href="../index.php"><strong>APS</strong></a></div>
+                    <div class="logo_ini"><img src="../img/Logo2.png" alt="" width="35px"><a class="navbar-brand" href="../index.php"><strong><i class="fa-solid fa-angle-left"></i></strong></a></div>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item perfil_usuario">
                             <div><img src="../img/Logo2.png" width="28px" alt=""></div>

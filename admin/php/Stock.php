@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/pcts.css">
     <link rel="stylesheet" href="../css/fontawesome.min.css">
+    <link rel="stylesheet" href="../css/sweetalert2.css">
     <link rel="shortcut icon" href="../img/Logo2.png" type="image/x-icon">
 </head>
 
@@ -21,7 +22,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <div class="logo_ini"><img src="../img/Logo2.png" alt="" width="35px"><a class="navbar-brand" href="../index.php"><strong>APS</strong></a></div>
+                    <div class="logo_ini"><img src="../img/Logo2.png" alt="" width="35px"><a class="navbar-brand" href="../index.php"><strong><i class="fa-solid fa-angle-left"></i></strong></a></div>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item perfil_usuario">
                             <div><img src="../img/Logo2.png" width="28px" alt=""></div>
@@ -44,51 +45,45 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            <form class="row g-3 needs-validation" novalidate method="post" action="NuevoFarmaco.php" enctype="multipart/form-data">
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom01" class="form-label">Nombre</label>
-                                                    <input type="text" class="form-control" id="validationCustom01" name="nombre" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
+                                            <form method="POST" id="farmacoForm">
+                                                <div class="mb-3">
+                                                    <label for="nombre" class="form-label">Nombre</label>
+                                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Formato</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="formato" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
+                                                <div class="mb-3">
+                                                    <label for="descripcion" class="form-label">Descripción</label>
+                                                    <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Via</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="via" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
+                                                <div class="mb-3">
+                                                    <label for="dosis" class="form-label">Dosis</label>
+                                                    <input type="text" class="form-control" id="dosis" name="dosis">
                                                 </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Uso</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="uso" required>
+                                                <div class="mb-3">
+                                                    <label for="via" class="form-label">Vía</label>
+                                                    <input type="text" class="form-control" id="via" name="via">
                                                 </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Efecto</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="efecto" required>
+                                                <div class="mb-3">
+                                                    <label for="forma_administracion" class="form-label">Forma de Administración</label>
+                                                    <input type="text" class="form-control" id="forma_administracion" name="forma_administracion">
                                                 </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Precio Unitario</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="precio_unitario" required>
+                                                <div class="mb-3">
+                                                    <label for="efectos_secundarios" class="form-label">Efectos Secundarios</label>
+                                                    <textarea class="form-control" id="efectos_secundarios" name="efectos_secundarios"></textarea>
                                                 </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Imagen</label>
-                                                    <input type="file" class="form-control" name="imagen" id="validationCustom02" required>
+                                                <div class="mb-3">
+                                                    <label for="estado_fisico" class="form-label">Estado Físico</label>
+                                                    <select class="form-control" id="estado_fisico" name="estado_fisico">
+                                                        <option value="Gaseoso">Gaseoso</option>
+                                                        <option value="Sólido">Sólido</option>
+                                                        <option value="Líquido">Líquido</option>
+                                                        <option value="Semisólido">Semisólido</option>
+                                                    </select>
                                                 </div>
-                                                <div class="col-12">
-                                                    <button class="btn btn-primary" type="submit">Agregar a Stock</button>
+                                                <div class="mb-3">
+                                                    <label for="stock" class="form-label">Stock</label>
+                                                    <input type="number" class="form-control" id="stock" name="stock" required>
                                                 </div>
+                                                <button type="submit" class="btn btn-primary">Registrar Fármaco</button>
                                             </form>
 
                                         </div>
@@ -99,65 +94,6 @@
                                 </div>
                             </div>
                         </li>
-
-                        <li class="nav-item stock">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-color-principal bx btn-modal-1" data-bs-toggle="modal" data-bs-target="#exampleModal_2">
-                                <i class="fa-solid fa-box-open"></i>
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal_2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">AGREGAR</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <form class="row g-3 needs-validation" novalidate method="post" action="StockFarmaco.php" enctype="multipart/form-data">
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom01" class="form-label">Cantidad</label>
-                                                    <input type="text" class="form-control" id="validationCustom01" name="cantidad" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Descripcion</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="descripcion" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">Farmaco</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="farmaco" required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="validationCustom02" class="form-label">ID Empleado</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" name="empleado" required>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <button class="btn btn-primary" type="submit">Agregar a Stock</button>
-                                                </div>
-                                            </form>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
@@ -188,19 +124,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
                             <th>Nombre</th>
+                            <th>Estado Fisico</th>
                             <th>Via</th>
-                            <th>Precio</th>
+                            <th>Cantidad Stock</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="farm_solidos">
+                        <!-- <tr>
                             <th th class="fototable">img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -209,19 +145,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
                             <th>Nombre</th>
+                            <th>Estado Fisico</th>
                             <th>Via</th>
-                            <th>Precio</th>
+                            <th>Cantidad Stock</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="farm_semisolidos">
+                        <!-- <tr>
                             <th th class="fototable">img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -230,19 +166,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
                             <th>Nombre</th>
+                            <th>Estado Fisico</th>
                             <th>Via</th>
-                            <th>Precio</th>
+                            <th>Cantidad Stock</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="farm_liquidos">
+                        <!-- <tr>
                             <th th class="fototable">img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -251,19 +187,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th th class="fototable">Foto</th>
                             <th>Nombre</th>
+                            <th>Estado Fisico</th>
                             <th>Via</th>
-                            <th>Precio</th>
+                            <th>Cantidad Stock</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="farm_gaseosos">
+                        <!-- <tr>
                             <th th class="fototable">img</th>
                             <th>Todos</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -273,6 +209,7 @@
 
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/menu_stock.js"></script>
+    <script src="../js/sweetalert2.js"></script>
 </body>
 
 </html>

@@ -16,7 +16,22 @@ body {
     flex-direction: column;
     text-decoration: none;
     background: linear-gradient(white, #c1eefc);
+    margin: 0; 
+    padding: 0;               
+    height: 100%;     
 }
+
+/* body {
+    margin: 0;                
+    height: 100%;             
+    overflow: hidden;         
+    font-family: Arial, sans-serif; 
+    background-color: #f0f0f0; 
+    display: flex;
+    flex-direction: column;   
+    justify-content: flex-start; 
+    overflow-x: hidden;       
+} */
 
 header {
     width: 100%;
@@ -524,4 +539,84 @@ footer {
     .btn {
         font-size: 12px;
     }
+}
+
+
+#loadingSpinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+#loadingSpinner_ini {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+#loadingSpinner_ini .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+.estado-pendiente {
+    background-color: #f8c146; /* Naranja */
+    color: white;
+    font-weight: bold;
+}
+
+.estado-confirmada {
+    background-color: #6c757d; /* Gris */
+    color: white;
+    font-weight: bold;
+}
+
+.estado-completada {
+    background-color: #28a745; /* Verde */
+    color: white;
+    font-weight: bold;
+}
+
+.estado-cancelada {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+    font-weight: bold;
+}
+
+/* Animación de transición */
+.estado {
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover para las filas */
+tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Botones personalizados */
+.btn-accion {
+    transition: all 0.3s ease;
+}
+
+.btn-accion:hover {
+    background-color: #555;
+    color: white;
 }

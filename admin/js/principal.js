@@ -1,3 +1,5 @@
+const estadisticas_citas = document.getElementById("estadisticas_citas");
+
 const boton_tema_oscuro = document.getElementById("boton-tema-oscuro"),
     boton_tema_normal = document.getElementById("boton-tema-normal"),
     fondo = document.getElementById("tema");
@@ -25,18 +27,27 @@ reciente.addEventListener('click', function () {
     panel_recientes.classList.add("ver");
     panel_c_reciente.classList.remove("ver");
     panel_recetado.classList.remove("ver");
+    if (estadisticas_citas) {
+        estadisticas_citas.classList.add("ocultar");
+    }
 });
 
 c_recientes.addEventListener('click', function () {
     panel_c_reciente.classList.add("ver");
     panel_recientes.classList.remove("ver");
     panel_recetado.classList.remove("ver");
+    if (estadisticas_citas) {
+        estadisticas_citas.classList.add("ocultar");
+    }
 });
 
 recetado.addEventListener('click', function () {
     panel_recetado.classList.add("ver");
     panel_recientes.classList.remove("ver");
     panel_c_reciente.classList.remove("ver");
+    if (estadisticas_citas) {
+        estadisticas_citas.classList.add("ocultar");
+    }
 });
 
 const menu = document.getElementById("boton-tema");
@@ -45,4 +56,7 @@ menu.addEventListener('click', function () {
     panel_recientes.classList.remove("ver");
     panel_c_reciente.classList.remove("ver");
     panel_recetado.classList.remove("ver");
+    if (estadisticas_citas) {
+        estadisticas_citas.classList.remove("ocultar");
+    }
 });

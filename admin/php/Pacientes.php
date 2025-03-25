@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +9,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/pcts.css">
     <link rel="stylesheet" href="../css/fontawesome.min.css">
+    <link rel="stylesheet" href="../css/sweetalert2.css">
     <link rel="shortcut icon" href="../img/Logo2.png" type="image/x-icon">
 </head>
 
@@ -23,7 +22,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <div class="logo_ini"><img src="../img/Logo2.png" alt="" width="35px"><a class="navbar-brand" href="../index.php"><strong>APS</strong></a></div>
+                    <div class="logo_ini"><img src="../img/Logo2.png" alt="" width="35px"><a class="navbar-brand" href="../index.php"><strong><i class="fa-solid fa-angle-left"></i></strong></a></div>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item perfil_usuario">
                             <div><img src="../img/Logo2.png" width="28px" alt=""></div>
@@ -144,8 +143,9 @@
                         <tr>
                             <th class="fototable">Foto</th>
                             <th>Nombre</th>
-                            <th>Apelldo</th>
-                            <th>Fecha Registro</th>
+                            <th>Apellidos</th>
+                            <th>Servicio</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody id="todo_pacientes">
@@ -165,20 +165,30 @@
                         <tr>
                             <th class="fototable">Foto</th>
                             <th>Nombre</th>
-                            <th>Apelldo</th>
                             <th>Servicio</th>
-                            <th>Estado</th>
-                            <th>Asignacion</th>
+                            <th>Motivo</th>
+                            <th>Asignar Medico</th>
                         </tr>
                     </thead>
-                    <tbody id="tratamiento">
+                    <tbody id="tratamiento_table">
                         <!-- <tr>
                             <th class="fototable">img</th>
                             <th>tratamiento</th>
                             <th>Apelldo</th>
                             <th>Estado</th>
                             <th>Estado</th>
-                            <th>Estado</th>
+                            <th>
+                                <form action="" method="post" id="form_Asicnacion">
+                                    <select class="btn" name="" id="">
+                                        <option value="#">Medico</option>
+                                        <option value="">1 medico</option>
+                                        <option value="">1 medico</option>
+                                        <option value="">1 medico</option>
+                                        <option value="">1 medico</option>
+                                    </select>
+                                    <button class="btn btn-success"><i style="color: green; border:none;" class="fa-solid fa-circle-check"></i></button>
+                                </form>
+                            </th>
                         </tr> -->
                     </tbody>
                 </table>
@@ -190,20 +200,56 @@
                         <tr>
                             <th class="fototable">Foto</th>
                             <th>Nombre</th>
-                            <th>Apelldo</th>
+                            <th>Apellidos</th>
+                            <th>Servicio</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="Completada">
+                        <!-- <tr>
                             <th class="fototable">img</th>
                             <th>tratado</th>
                             <th>Apelldo</th>
                             <th>Acciones</th>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div id="formulario" class="paneles" style="display: none;">
+            <h2>Agregar Historial Clínico</h2>
+            <form id="formHistorialClinico">
+                <!-- Campo oculto para el ID del paciente -->
+                <input type="hidden" id="id_paciente" name="id_paciente">
+
+                <div class="mb-3">
+                    <label for="fecha_hora" class="form-label">Fecha y Hora:</label>
+                    <input type="datetime-local" id="fecha_hora" name="fecha_hora" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="diagnostico" class="form-label">Diagnóstico:</label>
+                    <input type="text" id="diagnostico" name="diagnostico" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tratamiento" class="form-label">Tratamiento:</label>
+                    <input type="text" id="tratamiento" name="tratamiento" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="notas" class="form-label">Notas:</label>
+                    <textarea id="notas" name="notas" class="form-control" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tipo_historial" class="form-label">Tipo de Historial:</label>
+                    <input type="text" id="tipo_historial" name="tipo_historial" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
         </div>
 
     </main>
@@ -211,6 +257,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/menu.js"></script>
     <script src="../js/tratamiento.js"></script>
+    <script src="../js/sweetalert2.js"></script>
 </body>
 
 </html>

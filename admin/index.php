@@ -1,17 +1,21 @@
 <?php
 
+session_start();
+
 include_once('conexion/conexion.php');
 
+if (!$_SESSION['nombre'] && !$_SESSION['telefono']) {
+    header('location:../../../index.php');
+}
 
-
-$sql = "SELECT COUNT(id_paciente) FROM pacientes"; 
+$sql = "SELECT COUNT(id_paciente) FROM pacientes";
 $resultado = mysqli_query($conexion, $sql);
 
 if ($resultado) {
-    $pacientes = mysqli_fetch_row($resultado);  
-    $total_pacientes = $pacientes[0];  
+    $pacientes = mysqli_fetch_row($resultado);
+    $total_pacientes = $pacientes[0];
 } else {
-    $total_pacientes = 0; 
+    $total_pacientes = 0;
 }
 
 
@@ -19,10 +23,21 @@ $sql_citas = "SELECT COUNT(id_cita) FROM citas";
 $resultado_citas = mysqli_query($conexion, $sql_citas);
 
 if ($resultado_citas) {
-    $pacientes_citas = mysqli_fetch_row($resultado_citas);  
-    $total_pacientes_citas = $pacientes_citas[0];  
+    $pacientes_citas = mysqli_fetch_row($resultado_citas);
+    $total_pacientes_citas = $pacientes_citas[0];
 } else {
-    $total_pacientes_citas = 0; 
+    $total_pacientes_citas = 0;
+}
+
+
+$sql_farmacos = "SELECT COUNT(id_farmaco) FROM Farmacos";
+$resultado_farmacos = mysqli_query($conexion, $sql_farmacos);
+
+if ($resultado_farmacos) {
+    $farmacos = mysqli_fetch_row($resultado_farmacos);
+    $total_farmacos = $farmacos[0];
+} else {
+    $total_farmacos = 0;
 }
 
 mysqli_close($conexion);
@@ -102,10 +117,10 @@ mysqli_close($conexion);
                 </li>
 
                 <li class="logout">
-                    <a href="#">
+                    <button id="cerrarSesionBtn" type="button" style="width: 120px; display:flex; gap:40px; background-color: white; border:none; justify-content:center; position:relative;">
                         <div><i class="fa-solid fa-arrow-right-from-bracket" style="color: red;"></i></div>
                         <div><span style="color: red;">Salir</span></div>
-                    </a>
+                    </button>
                 </li>
 
             </ul>
@@ -151,7 +166,7 @@ mysqli_close($conexion);
                     <h5>FARMACOS</h5>
                 </div>
                 <div><span>
-                        <h2>0</h2>
+                        <h2><?php echo $total_farmacos; ?></h2>
                     </span></div>
             </div>
             <div class="panel panel-citas">
@@ -252,13 +267,98 @@ mysqli_close($conexion);
                 </table>
             </div>
         </div>
+        <div id="loadingSpinner" style="display: none;">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="text-light">
+            <h1>Cerrar sesión...</h1>
+            </p>
+        </div>
+
+        <div class="estadisticas_citas" id="estadisticas_citas">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Estadísticas de Citas</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="citasChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', './php/obtener_estadisticas_citas.php', true);
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(xhr.responseText);
+
+
+                    var estados = [];
+                    var cantidades = [];
+
+
+                    data.forEach(function(item) {
+                        estados.push(item.estado);
+                        cantidades.push(item.cantidad);
+                    });
+
+
+                    var ctx = document.getElementById('citasChart').getContext('2d');
+                    var citasChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: estados,
+                            datasets: [{
+                                label: 'Número de citas',
+                                data: cantidades,
+                                backgroundColor: ['#FF6347', '#4CAF50', '#FFC107', '#2196F3'],
+                                borderColor: ['#FF6347', '#4CAF50', '#FFC107', '#2196F3'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(tooltipItem) {
+                                            return tooltipItem.label + ': ' + tooltipItem.raw + ' citas';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    function resizeChart() {
+                        citasChart.resize(); // Ajusta el tamaño del gráfico
+                    }
+
+                    // Llamar a resizeChart cuando la ventana cambie de tamaño
+                    window.addEventListener('resize', resizeChart);
+
+                    // Llamar a resizeChart inmediatamente para que el gráfico tenga el tamaño correcto al cargar
+                    resizeChart();
+                }
+            };
+            xhr.send();
+        </script>
 
     </main>
 
     <script src="js/bootstrap.min.js"></script>
+    <script src="./js/chart.js"></script>
     <script src="js/principal.js"></script>
     <script src="js/usuarios_recientes.js"></script>
     <script src="../js/sweetalert2.js"></script>
+    <script src="./js/cerrar_Sesion_admin.js"></script>
 </body>
 
 </html>

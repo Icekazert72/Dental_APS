@@ -14,13 +14,13 @@ session_start();
 </head>
 
 <link rel="stylesheet" href="../css/all.min.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/Est.css">
-    <link rel="stylesheet" href="../css/fontawesome.min.css">
-    <link rel="stylesheet" href="../css/sweetalert2.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/Est.css">
+<link rel="stylesheet" href="../css/fontawesome.min.css">
+<link rel="stylesheet" href="../css/sweetalert2.css">
 
 <body style="height: 100vh; display:flex;">
-   
+
 
     <header>
         <div class="contactos container">
@@ -153,6 +153,13 @@ session_start();
                 </div>
                 <button type="button" id="btnNoCondicion" class="btn mt-4" style="color: red; background-color: red;"><i class="fa-solid fa-rectangle-xmark" style=" color: white; "></i></button>
             </div>
+        </div>
+
+        <div id="loadingSpinner_ini" style="display: none;">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="text-light"><h1>Iniciando sesión...</h1></p>
         </div>
 
 
